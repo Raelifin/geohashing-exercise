@@ -1,4 +1,30 @@
 describe("Geohash", function() {
+	
+	describe('geoHash', function() {
+		var subject = require('../lib/geohash').geoHash;
+		/**
+		* Max's learning note:
+		* This seems really clunky. I know the runs and waitsFor style got depricated in Jasmine 2.0, but I still think this could be cleaner.
+		* How does it relate to Arrange, Act, and Assert? Is this right?
+		*/
+		it('returns a latitude and longitude', function() {
+			//Arrange
+			var sampleLat = '1.001';
+			var sampleLon = '2.002';
+			var result;
+			//Act
+			runs(function() { subject(sampleLat, sampleLon, function(r) { result = r; }); });
+			waitsFor(function() { return result; }, "Result should exist", 1000);
+			//Assert
+			runs(function() {
+				expect(result['lat']).toBeDefined();
+				expect(result['lon']).toBeDefined();
+				expect(isNaN(parseFloat(result['lat']))).toBe(false);
+				expect(isNaN(parseFloat(result['lon']))).toBe(false);
+			});
+		});
+	});
+	
 	describe('makeDateString', function() {
 		var subject = require('../lib/geohash').makeDateString;
 		it('returns a formatted date string', function() {
