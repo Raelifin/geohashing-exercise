@@ -67,8 +67,8 @@ describe("Geohash", function() {
 			
 			var result = subject(inLat, inLon, date, price);
 			
-			expect(result['lat']).toBe(1.413281);
-			expect(result['lon']).toBe(2.127410);
+			expect(result['lat']).toBe(1.358264);
+			expect(result['lon']).toBe(2.404788);
 		});
 	});
 	
@@ -83,6 +83,14 @@ describe("Geohash", function() {
 			var result = subject(date, price);
 			
 			expect(result).toBe('ef73efba80d18e9c924276df7e6285a1');
+		});
+		it('returns an md5 hash on another sample input', function() {
+			var date = new Date('February 11, 2016 03:24:00');
+			var price = '15897.82';
+			
+			var result = subject(date, price);
+			
+			expect(result).toBe('769b7a4d524643842e2f7c954024b6e6');
 		});
 	});
 	
