@@ -7,7 +7,12 @@ app.get('/geohash', function(req, res, next) {
 	respond = function(data){
 		res.json(data);
 	};
-
+	geoHash(req.query.lat, req.query.lon, respond);
+});
+app.post('/geohash', function(req, res, next) {
+	respond = function(data){
+		res.json(data);
+	};
 	geoHash(req.query.lat, req.query.lon, respond);
 });
 
