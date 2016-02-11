@@ -7,7 +7,7 @@ describe("Geohash", function() {
 		* This seems really clunky. I know the runs and waitsFor style got depricated in Jasmine 2.0, but I still think this could be cleaner.
 		* How does it relate to Arrange, Act, and Assert? Is this right?
 		*/
-		it('returns a latitude and longitude', function() {
+		it('returns a latitude and longitude significant to 6 decimals', function() {
 			//Arrange
 			var sampleLat = '1.001';
 			var sampleLon = '2.002';
@@ -21,8 +21,10 @@ describe("Geohash", function() {
 			runs(function() {
 				expect(result['lat']).toBeDefined();
 				expect(result['lon']).toBeDefined();
-				expect(isNaN(parseFloat(result['lat']))).toBe(false);
-				expect(isNaN(parseFloat(result['lon']))).toBe(false);
+				expect(isNaN(result['lat'])).toBe(false);
+				expect(isNaN(result['lon'])).toBe(false);
+				expect(Math.round(result['lat']*1000000)/1000000).toBe(result['lat']);
+				expect(Math.round(result['lon']*1000000)/1000000).toBe(result['lon']);
 			});
 		});
 	});
