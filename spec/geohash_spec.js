@@ -44,6 +44,17 @@ describe("Geohash", function() {
 	
 	
 	
+	describe('hashDateAndPrice', function() {
+		var subject = require('../lib/geohash').hashDateAndPrice;
+		it('returns a 32 character string', function() {
+			var date = new Date('December 17, 1995 03:24:00');
+			var price = '3996.77';
+			
+			var result = subject(date, price);
+			
+			expect(result.length).toBe(32);
+		});
+	});
 	
 	describe('makeDateString', function() {
 		var subject = require('../lib/geohash').makeDateString;
