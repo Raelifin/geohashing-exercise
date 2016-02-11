@@ -1,7 +1,7 @@
 express = require('express');
 app     = express();
 
-geoHash = require('./lib/geohash');
+geoHash = require('./lib/geohash').geoHash;
 
 app.get('/geohash', function(req, res, next) {
   respond = function(data){

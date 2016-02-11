@@ -41,7 +41,17 @@ describe("Geohash", function() {
 			expect(result['lon']).toBe('2.10539116780270553000');
 		});
 		
-		
+		it('returns the correct latitude and longetude for Jan 3, 2016 and price=4', function() {
+			var inLat = '1.001';
+			var inLon = '2.002';
+			var date = new Date('Jan 3, 2016 03:24:00');
+			var price = '4';
+			
+			var result = subject(inLat, inLon, date, price);
+			
+			expect(result['lat']).toBe('1.4132808664663935000');
+			expect(result['lon']).toBe('2.12741033850631471000');
+		});
 	});
 	
 	
