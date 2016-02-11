@@ -27,6 +27,21 @@ describe("Geohash", function() {
 		});
 	});
 	
+	describe('buildGeoHash', function() {
+		var subject = require('../lib/geohash').buildGeoHash;
+		it('returns the correct latitude and longetude for Dec 17, 1995', function() {
+			var inLat = '1.001';
+			var inLon = '2.002';
+			var date = new Date('December 17, 1995 03:24:00');
+			var price = '3996.77';
+			
+			var result = subject(inLat, inLon, date, price);
+			
+			expect(result['lat']).toBe('1.17254398181690675000');
+			expect(result['lon']).toBe('2.10539116780270553000');
+		});
+	});
+	
 	
 	
 	
