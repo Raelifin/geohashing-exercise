@@ -43,6 +43,26 @@ describe("Geohash", function() {
 				expect(Math.ceil(result['lon'])).toBe(-122);
 			});
 		});
+		/**
+		* Max's learning note:
+		* Promises are interesting!
+		* Again, is this the right Arrange, Act, Assert structure?
+		*/
+		it('works with promises', function(done) {
+			//Arrange
+			var sampleLat = '1.001';
+			var sampleLon = '-122.002';
+			
+			//Act
+			subject(sampleLat, sampleLon).then(function(result) {
+				
+				//Assert
+				expect(Math.floor(result['lat'])).toBe(1);
+				expect(Math.ceil(result['lon'])).toBe(-122);
+				
+				done();
+			});
+		});
 	});
 	
 	describe('buildGeoHash', function() {
