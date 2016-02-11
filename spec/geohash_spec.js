@@ -15,7 +15,7 @@ describe("Geohash", function() {
 			
 			//Act
 			runs(function() { subject(sampleLat, sampleLon, function(r) { result = r; }); });
-			waitsFor(function() { return result; }, "Result should exist", 1000);
+			waitsFor(() => result, "Result should exist", 1000);
 			
 			//Assert
 			runs(function() {
@@ -35,7 +35,7 @@ describe("Geohash", function() {
 			
 			//Act
 			runs(function() { subject(sampleLat, sampleLon, function(r) { result = r; }); });
-			waitsFor(function() { return result; }, "Result should exist", 1000);
+			waitsFor(() => result, "Result should exist", 1000);
 			
 			//Assert
 			runs(function() {
