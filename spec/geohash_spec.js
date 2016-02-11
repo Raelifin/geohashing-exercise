@@ -27,6 +27,22 @@ describe("Geohash", function() {
 				expect(Math.round(result['lon']*1000000)/1000000).toBe(result['lon']);
 			});
 		});
+		it('returns a lat and lon that have the same non-decimal component, even with negative input coords', function() {
+			//Arrange
+			var sampleLat = '1.001';
+			var sampleLon = '-122.002';
+			var result;
+			
+			//Act
+			runs(function() { subject(sampleLat, sampleLon, function(r) { result = r; }); });
+			waitsFor(function() { return result; }, "Result should exist", 1000);
+			
+			//Assert
+			runs(function() {
+				expect(Math.floor(result['lat'])).toBe(1);
+				expect(Math.ceil(result['lon'])).toBe(-122);
+			});
+		});
 	});
 	
 	describe('buildGeoHash', function() {
