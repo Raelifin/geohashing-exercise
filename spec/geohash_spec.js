@@ -29,7 +29,7 @@ describe("Geohash", function() {
 	
 	describe('buildGeoHash', function() {
 		var subject = require('../lib/geohash').buildGeoHash;
-		it('returns the correct latitude and longetude for Dec 17, 1995', function() {
+		it('returns the correct latitude and longetude for Dec 17, 1995 and price=3996.77', function() {
 			var inLat = '1.001';
 			var inLon = '2.002';
 			var date = new Date('December 17, 1995 03:24:00');
@@ -40,19 +40,21 @@ describe("Geohash", function() {
 			expect(result['lat']).toBe('1.17254398181690675000');
 			expect(result['lon']).toBe('2.10539116780270553000');
 		});
+		
+		
 	});
 	
 	
 	
 	describe('hashDateAndPrice', function() {
 		var subject = require('../lib/geohash').hashDateAndPrice;
-		it('returns a 32 character string', function() {
+		it('returns an md5 hash on sample input', function() {
 			var date = new Date('December 17, 1995 03:24:00');
 			var price = '3996.77';
 			
 			var result = subject(date, price);
 			
-			expect(result.length).toBe(32);
+			expect(result).toBe('ef73efba80d18e9c924276df7e6285a1');
 		});
 	});
 	
