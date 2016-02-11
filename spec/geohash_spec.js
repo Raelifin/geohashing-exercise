@@ -2,25 +2,46 @@ describe("Geohash", function() {
 	
 	describe('geoHash', function() {
 		var subject = require('../lib/geohash').geoHash;
+		/**
+		* Max's learning note:
+		* This seems really clunky. I know the runs and waitsFor style got depricated in Jasmine 2.0, but I still think this could be cleaner.
+		* How does it relate to Arrange, Act, and Assert? Is this right?
+		*/
 		it('returns a latitude and longitude significant to 6 decimals', function() {
+			//Arrange
 			var sampleLat = '1.001';
 			var sampleLon = '2.002';
+			var result;
 			
-			var result = subject(sampleLat, sampleLon);
+			//Act
+			runs(function() { subject(sampleLat, sampleLon, function(r) { result = r; }); });
+			waitsFor(function() { return result; }, "Result should exist", 1000);
 			
-			expect(isNaN(result['lat'])).toBe(false);
-			expect(isNaN(result['lon'])).toBe(false);
-			expect(Math.round(result['lat']*1000000)/1000000).toBe(result['lat']);
-			expect(Math.round(result['lon']*1000000)/1000000).toBe(result['lon']);
+			//Assert
+			runs(function() {
+				expect(result['lat']).toBeDefined();
+				expect(result['lon']).toBeDefined();
+				expect(isNaN(result['lat'])).toBe(false);
+				expect(isNaN(result['lon'])).toBe(false);
+				expect(Math.round(result['lat']*1000000)/1000000).toBe(result['lat']);
+				expect(Math.round(result['lon']*1000000)/1000000).toBe(result['lon']);
+			});
 		});
 		it('returns a lat and lon that have the same non-decimal component, even with negative input coords', function() {
+			//Arrange
 			var sampleLat = '1.001';
 			var sampleLon = '-122.002';
+			var result;
 			
-			var result = subject(sampleLat, sampleLon);
+			//Act
+			runs(function() { subject(sampleLat, sampleLon, function(r) { result = r; }); });
+			waitsFor(function() { return result; }, "Result should exist", 1000);
 			
-			expect(Math.floor(result['lat'])).toBe(1);
-			expect(Math.ceil(result['lon'])).toBe(-122);
+			//Assert
+			runs(function() {
+				expect(Math.floor(result['lat'])).toBe(1);
+				expect(Math.ceil(result['lon'])).toBe(-122);
+			});
 		});
 	});
 	

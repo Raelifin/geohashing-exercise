@@ -4,10 +4,16 @@ app     = express();
 geoHash = require('./lib/geohash').geoHash;
 
 app.get('/geohash', function(req, res, next) {
-	res.json(geoHash(req.query.lat, req.query.lon));
+	respond = function(data){
+		res.json(data);
+	};
+	geoHash(req.query.lat, req.query.lon, respond);
 });
 app.post('/geohash', function(req, res, next) {
-	res.json(geoHash(req.query.lat, req.query.lon));
+	respond = function(data){
+		res.json(data);
+	};
+	geoHash(req.query.lat, req.query.lon, respond);
 });
 
 app.listen(8000, function() {
