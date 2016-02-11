@@ -55,8 +55,8 @@ describe("Geohash", function() {
 			
 			var result = subject(inLat, inLon, date, price);
 			
-			expect(result['lat']).toBe(1.17254398181690675000);
-			expect(result['lon']).toBe(2.10539116780270553000);
+			expect(result['lat']).toBe(1.172544);
+			expect(result['lon']).toBe(2.105391);
 		});
 		
 		it('returns the correct latitude and longetude for Jan 3, 2016 and price=4', function() {
@@ -67,8 +67,8 @@ describe("Geohash", function() {
 			
 			var result = subject(inLat, inLon, date, price);
 			
-			expect(result['lat']).toBe(1.4132808664663935);
-			expect(result['lon']).toBe(2.12741033850631471);
+			expect(result['lat']).toBe(1.413281);
+			expect(result['lon']).toBe(2.127410);
 		});
 	});
 	
