@@ -33,7 +33,7 @@ describe('Webcache', function() {
 	
 	describe('cacheable', function() {
 		var subject = require('../lib/webcache').cacheable;
-		it ('creates can create different cacheable functions on different keys', function() {
+		it ('can create different cacheable functions on different keys', function() {
 			var key1 = 42;
 			var key2 = 1337;
 			
@@ -45,6 +45,17 @@ describe('Webcache', function() {
 			expect(result2(key2)).toBe(result2(key2));
 			expect(result2(-key2)).not.toBe(result2(-key2));
 			expect(result1(key1)).not.toBe(result2(key2));
+		});
+		it ('can handle functions with more than one parameter by keying on the first parameter only', function() {
+			var key = 42;
+			var param2 = 1337;
+			var alternateParam2 = -0.1337
+			
+			var result = subject((x,y) => Math.random()*x*y, key);
+			
+			expect(result(key,param2)).toBe(result(key,param2));
+			expect(result(-key,param2)).not.toBe(result(-key,param2));
+			expect(result(key,param2)).toBe(result(key,alternateParam2));
 		});
 	});
 	
