@@ -23,4 +23,16 @@ describe('Webcache', function() {
 			 });
 		});
 	});
+	
+	describe('cacheable', function() {
+		var subject = require('../lib/webcache').cacheable;
+		it ('creates a cacheable function on a specific key', function() {
+			var key = 37;
+			
+			var result = subject(x => Math.random()*x, key);
+			
+			expect(result(key)).toBe(result(key));
+			expect(result(-key)).not.toBe(result(-key));
+		});
+	});
 });
