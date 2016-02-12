@@ -53,7 +53,7 @@ describe('Webcache', function() {
 		it ('creates a cacheable function on a specific key', function() {
 			var key = 42;
 			
-			var result = subject(x => Math.random()*x, key);
+			var result = subject(x => Math.random()*x, key, 5);
 			
 			expect(result(key)).toBe(result(key));
 			expect(result(-key)).not.toBe(result(-key));
@@ -74,7 +74,7 @@ describe('Webcache', function() {
 				expect(output1).not.toBe(output2);
 				
 				done();
-			}, 1000);
+			}, 600);
 		});
 	});
 });
