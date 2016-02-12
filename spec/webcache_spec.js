@@ -46,16 +46,15 @@ describe('Webcache', function() {
 			expect(result2(-key2)).not.toBe(result2(-key2));
 			expect(result1(key1)).not.toBe(result2(key2));
 		});
-		it ('can handle functions with more than one parameter by keying on the first parameter only', function() {
-			var key = 42;
-			var param2 = 1337;
-			var alternateParam2 = -0.1337
+		it ('can handle functions with more than one parameter', function() {
+			var p1 = 42;
+			var p2 = 1337;
 			
-			var result = subject((x,y) => Math.random()*x*y, key);
+			var result = subject((x,y) => Math.random()*x*y, [p1,p2]);
 			
-			expect(result(key,param2)).toBe(result(key,param2));
-			expect(result(-key,param2)).not.toBe(result(-key,param2));
-			expect(result(key,param2)).toBe(result(key,alternateParam2));
+			expect(result(p1,p2)).toBe(result(p1,p2));
+			expect(result(-p1,p2)).not.toBe(result(-p1,p2));
+			expect(result(p1,-p2)).not.toBe(result(p1,-p2));
 		});
 	});
 	
@@ -69,16 +68,15 @@ describe('Webcache', function() {
 			expect(result(key)).toBe(result(key));
 			expect(result(-key)).not.toBe(result(-key));
 		});
-		it ('can handle functions with more than one parameter by keying on the first parameter only', function() {
-			var key = 42;
-			var param2 = 1337;
-			var alternateParam2 = -0.1337
+		it ('can handle functions with more than one parameter', function() {
+			var p1 = 42;
+			var p2 = 1337;
 			
-			var result = subject((x,y) => Math.random()*x*y, key, 5);
+			var result = subject((x,y) => Math.random()*x*y, [p1,p2], 5);
 			
-			expect(result(key,param2)).toBe(result(key,param2));
-			expect(result(-key,param2)).not.toBe(result(-key,param2));
-			expect(result(key,param2)).toBe(result(key,alternateParam2));
+			expect(result(p1,p2)).toBe(result(p1,p2));
+			expect(result(-p1,p2)).not.toBe(result(-p1,p2));
+			expect(result(p1,-p2)).not.toBe(result(p1,-p2));
 		});
 		/**
 		 * Max's learning note:
