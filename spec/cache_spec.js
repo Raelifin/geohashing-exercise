@@ -1,38 +1,12 @@
-describe('Webcache', function() {
-	
-	describe('reportSiteContents', function() {
-		var subject = require('../lib/webcache').reportSiteContents;
-		it('returns a string with text from example.org when asked for example.org', function(done) {
-			 var url = 'http://example.org';
-			 
-			 subject(url).then(function(result) {
-				 
-				 expect(result).toMatch(/<p>This domain is established to be used for illustrative examples in documents/);
-				 
-				 done();
-			 });
-		});
-		it('accepts callbacks', function(done) {
-			 var url = 'http://example.org';
-			 
-			 subject(url, function(result) {
-				 
-				 expect(result).toMatch(/<p>This domain is established to be used for illustrative examples in documents/);
-				 
-				 done();
-			 });
-		});
-	});
-	
+describe('Cache', function() {
 	/**
 	 * Max's learning note:
 	 * In the Arrange->Act->Assert paradigm, does a test of a higher-order function treat
 	 * the first-order function as the result, or does it test the data it feeds the
 	 * first-order function as the result? I'm a bit confused here.
 	 **/
-	
 	describe('cacheable', function() {
-		var subject = require('../lib/webcache').cacheable;
+		var subject = require('../lib/cache').cacheable;
 		it ('can create different cacheable functions on different keys', function() {
 			var key1 = 42;
 			var key2 = 1337;
@@ -59,7 +33,7 @@ describe('Webcache', function() {
 	});
 	
 	describe('cacheableWithExpiration', function() {
-		var subject = require('../lib/webcache').cacheableWithExpiration;
+		var subject = require('../lib/cache').cacheableWithExpiration;
 		it ('creates a cacheable function on a specific key', function() {
 			var key = 42;
 			
