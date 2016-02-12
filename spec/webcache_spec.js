@@ -69,6 +69,17 @@ describe('Webcache', function() {
 			expect(result(key)).toBe(result(key));
 			expect(result(-key)).not.toBe(result(-key));
 		});
+		it ('can handle functions with more than one parameter by keying on the first parameter only', function() {
+			var key = 42;
+			var param2 = 1337;
+			var alternateParam2 = -0.1337
+			
+			var result = subject((x,y) => Math.random()*x*y, key, 5);
+			
+			expect(result(key,param2)).toBe(result(key,param2));
+			expect(result(-key,param2)).not.toBe(result(-key,param2));
+			expect(result(key,param2)).toBe(result(key,alternateParam2));
+		});
 		/**
 		 * Max's learning note:
 		 * I'm really curious how to best handle the Arrange->Act->Assert paradigm in weird tests like this one.
