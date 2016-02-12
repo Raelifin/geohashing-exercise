@@ -37,7 +37,7 @@ describe('Cache', function() {
 		it ('creates a cacheable function on a specific key', function() {
 			var key = 42;
 			
-			var result = subject(x => Math.random()*x, key, 5);
+			var result = subject(x => Math.random()*x, key, 5000);
 			
 			expect(result(key)).toBe(result(key));
 			expect(result(-key)).not.toBe(result(-key));
@@ -46,7 +46,7 @@ describe('Cache', function() {
 			var p1 = 42;
 			var p2 = 1337;
 			
-			var result = subject((x,y) => Math.random()*x*y, [p1,p2], 5);
+			var result = subject((x,y) => Math.random()*x*y, [p1,p2], 5000);
 			
 			expect(result(p1,p2)).toBe(result(p1,p2));
 			expect(result(-p1,p2)).not.toBe(result(-p1,p2));
@@ -60,7 +60,7 @@ describe('Cache', function() {
 		it ('expires in the appropriate amount of time', function(done) {
 			var key = 42;
 			
-			var result = subject(x => Math.random()*x, key, 0.5);
+			var result = subject(x => Math.random()*x, key, 500);
 			var output1 = result(key);
 			setTimeout(function() {
 				var output2 = result(key);
