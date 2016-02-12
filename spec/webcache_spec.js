@@ -12,5 +12,15 @@ describe('Webcache', function() {
 				 done();
 			 });
 		});
+		it('accepts callbacks', function(done) {
+			 var url = 'http://example.org';
+			 
+			 subject(url, function(result) {
+				 
+				 expect(result).toMatch(/<p>This domain is established to be used for illustrative examples in documents/);
+				 
+				 done();
+			 });
+		});
 	});
 });
